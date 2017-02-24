@@ -2070,11 +2070,14 @@ func (r resourceNameSort) Less(i, j int) bool {
 		case jIntErr == nil:
 			return false
 		default:
+			if iParts[idx] == jParts[idx] {
+				return len(iParts) < len(jParts)
+			}
 			return iParts[idx] < jParts[idx]
 		}
 	}
 
-	return false
+	return r[i] < r[j]
 }
 
 // moduleStateSort implements sort.Interface to sort module states
